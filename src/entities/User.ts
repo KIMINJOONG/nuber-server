@@ -69,12 +69,17 @@ class User extends BaseEntity {
     @CreateDateColumn() createdAt: string;
     @UpdateDateColumn() updatedAt: string;
     
+    // fullName은 이미 있는것을 합치는것이므로 함수로 선언
     get fullName(): string{
         return `${this.firstName} ${this.lastName}`;
     }
 
-    
+    // 유저가 입력한 패스워드와 해쉬(암호화)된 패스워드 비교함수 resolver에서 사용예정
+    public comparePassword(password: string) : Promise<boolean>{
+        return bcrypt.compare(password, this.password);
+    }
 
+    // Insert Update하기전 전달받은 패스워드 암호화하는 함수
     @BeforeInsert()
     @BeforeUpdate()
     async savePassword() : Promise<void> {
