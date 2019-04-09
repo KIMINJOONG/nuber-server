@@ -6,7 +6,6 @@ import {
   PrimaryColumn,
   UpdateDateColumn
 } from "typeorm";
-import { placeTarget } from "src/types/Types";
 
 @Entity()
 class Place extends BaseEntity {
@@ -24,7 +23,7 @@ class Place extends BaseEntity {
   @Column({ type: "text" })
   address: string;
 
-  @Column({ type: "boolean", default: 0 })
+  @Column({ type: "boolean", default: false })
   isFav: boolean;
 
   @CreateDateColumn() createdAt: string;
