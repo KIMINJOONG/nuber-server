@@ -5,9 +5,11 @@ import {
   Entity,
   PrimaryColumn,
   UpdateDateColumn,
-  BeforeInsert
+  BeforeInsert,
+  ManyToOne
 } from "typeorm";
 import { verificationTarget } from "src/types/Types";
+import User from "./User";
 
 const PHONE = "PHONE";
 const EMAIL = "EMAIL";
@@ -28,7 +30,11 @@ class Verification extends BaseEntity {
   @Column({ type: "boolean", default: false })
   used: boolean;
 
-  @CreateDateColumn() createdAt: string;
+  @ManyToOne(type => User, user => user.verifications)
+  user: User;
+
+  @CreateDateColumn()
+  createdAt: string;
   @UpdateDateColumn() updatedAt: string;
 
   // Insert를 하기전에 target을 구분한후 랜덤으로 key를 만들어주는 함수
