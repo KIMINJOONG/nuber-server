@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
   ManyToOne
 } from "typeorm";
-import { rideStatus } from "src/types/Types";
+import { rideStatus } from "src/types/types";
 import User from "./User";
 
 @Entity()
