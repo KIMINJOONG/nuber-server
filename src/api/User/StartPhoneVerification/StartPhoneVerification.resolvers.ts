@@ -4,6 +4,7 @@ import {
   StartPhoneVerificationResponse
 } from "../../../types/graph";
 import Verification from "../../../entities/Verification";
+import { sendVerificationSMS } from "../../../utils/sendSMS";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -23,7 +24,13 @@ const resolvers: Resolvers = {
           payload: phoneNumber,
           target: "PHONE"
         }).save();
+        console.log(newVerification);
         // to do: send SMS
+        await sendVerificationSMS(newVerification.payload, newVerification.key);
+        return {
+          ok: true,
+          error: null
+        };
       } catch (error) {
         return {
           ok: false,

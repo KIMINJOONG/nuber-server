@@ -3,20 +3,18 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryColumn,
   UpdateDateColumn,
   BeforeInsert,
-  ManyToOne
+  PrimaryGeneratedColumn
 } from "typeorm";
 import { verificationTarget } from "src/types/types";
-import User from "./User";
 
 const PHONE = "PHONE";
 const EMAIL = "EMAIL";
 
 @Entity()
 class Verification extends BaseEntity {
-  @PrimaryColumn() id: number;
+  @PrimaryGeneratedColumn() id: number;
 
   @Column({ type: "text", enum: [PHONE, EMAIL] })
   target: verificationTarget;
