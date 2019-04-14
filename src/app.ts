@@ -4,12 +4,18 @@ import helmet from "helmet";
 import logger from "morgan";
 import schema from "./schema";
 import decodeJWT from "./utils/decodeJWT";
+import { NextFunction, Response } from "express";
 
 class App {
   public app: GraphQLServer;
   constructor() {
     this.app = new GraphQLServer({
-      schema
+      schema,
+      context: req => {
+        return {
+          req: req.request
+        };
+      }
     });
     this.middlewares();
   }
@@ -21,10 +27,20 @@ class App {
   };
 
   // token을 여는 함수
-  private jwt = async (req, res, next): Promise<void> => {
+  private jwt = async (
+    req,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     const token = req.get("X-JWT");
     if (token) {
       const user = await decodeJWT(token);
+      if (user) {
+        // 새로운 user property를 request에 붙여버리는것
+        req.user = user;
+      } else {
+        req.user = undefined;
+      }
     }
     next();
   };
