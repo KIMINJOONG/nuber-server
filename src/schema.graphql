@@ -46,6 +46,17 @@ type EditPlaceResponse {
   error: String
 }
 
+type GetMyPlacesResponse {
+  ok: Boolean!
+  error: String
+  places: [Place]
+}
+
+type Query {
+  GetMyPlaces: GetMyPlacesResponse!
+  GetMyProfile: GetMyProfileResponse!
+}
+
 type Place {
   id: Int!
   name: String!
@@ -62,7 +73,7 @@ type Place {
 type Ride {
   id: Int!
   status: String!
-  pickUpAdress: String!
+  pickUpAddress: String!
   pickUpLat: Float!
   pickUpLng: Float!
   dropOffAddress: String!
@@ -112,11 +123,6 @@ type GetMyProfileResponse {
   user: User
 }
 
-type Query {
-  GetMyProfile: GetMyProfileResponse!
-  user: User
-}
-
 type ReportMovementResponse {
   ok: Boolean!
   error: String
@@ -147,12 +153,12 @@ type User {
   lastOrientation: Float
   fbId: String
   chat: Chat
-  message: [Message]
+  messages: [Message]
   ridesAsPassenger: [Ride]
   ridesAsDriver: [Ride]
   places: [Place]
   createdAt: String!
-  updateAt: String
+  updatedAt: String
 }
 
 type StartPhoneVerificationResponse {

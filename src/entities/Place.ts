@@ -3,15 +3,15 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryColumn,
   UpdateDateColumn,
-  ManyToOne
+  ManyToOne,
+  PrimaryGeneratedColumn
 } from "typeorm";
 import User from "./User";
 
 @Entity()
 class Place extends BaseEntity {
-  @PrimaryColumn() id: number;
+  @PrimaryGeneratedColumn() id: number;
 
   @Column({ type: "text" })
   name: string;

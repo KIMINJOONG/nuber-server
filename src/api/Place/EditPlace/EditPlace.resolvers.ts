@@ -1,9 +1,9 @@
-import { Resolvers } from "../../../types/resolvers";
-import privateResolver from "../../../utils/resolverMiddleware";
-import User from "../../../entities/User";
-import { EditPlaceResponse, EditPlaceMutationArgs } from "../../../types/graph";
 import Place from "../../../entities/Place";
+import User from "../../../entities/User";
+import { EditPlaceMutationArgs, EditPlaceResponse } from "../../../types/graph";
+import { Resolvers } from "../../../types/resolvers";
 import cleanNullArgs from "../../../utils/cleanNullArg";
+import privateResolver from "../../../utils/resolverMiddleware";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -18,7 +18,10 @@ const resolvers: Resolvers = {
           const place = await Place.findOne({ id: args.placeId });
           if (place) {
             if (place.userId === user.id) {
-              const notNull = cleanNullArgs(args);
+              const notNull: any = cleanNullArgs(args);
+              if (notNull.placeId !== null) {
+                delete notNull.placeId;
+              }
               await Place.update({ id: args.placeId }, { ...notNull });
               return {
                 ok: true,
@@ -27,13 +30,13 @@ const resolvers: Resolvers = {
             } else {
               return {
                 ok: false,
-                error: "Not authorized"
+                error: "Not Authorized"
               };
             }
           } else {
             return {
               ok: false,
-              error: "Place Not found"
+              error: "Place not found"
             };
           }
         } catch (error) {
@@ -46,5 +49,4 @@ const resolvers: Resolvers = {
     )
   }
 };
-
 export default resolvers;

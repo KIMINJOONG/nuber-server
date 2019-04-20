@@ -2,10 +2,10 @@ import {
   BaseEntity,
   CreateDateColumn,
   Entity,
-  PrimaryColumn,
   UpdateDateColumn,
   ManyToOne,
-  Column
+  Column,
+  PrimaryGeneratedColumn
 } from "typeorm";
 
 import Chat from "./Chat";
@@ -13,7 +13,7 @@ import User from "./User";
 
 @Entity()
 class Message extends BaseEntity {
-  @PrimaryColumn() id: number;
+  @PrimaryGeneratedColumn() id: number;
 
   @Column({ type: "text" })
   text: string;

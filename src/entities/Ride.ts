@@ -3,16 +3,16 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryColumn,
   UpdateDateColumn,
-  ManyToOne
+  ManyToOne,
+  PrimaryGeneratedColumn
 } from "typeorm";
 import { rideStatus } from "src/types/types";
 import User from "./User";
 
 @Entity()
 class Ride extends BaseEntity {
-  @PrimaryColumn() id: number;
+  @PrimaryGeneratedColumn() id: number;
 
   @Column({
     type: "text",
