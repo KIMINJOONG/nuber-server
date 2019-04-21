@@ -88,6 +88,15 @@ class User extends BaseEntity {
   @OneToMany(type => Place, place => place.user)
   places: Place[];
 
+  @Column({ type: "double precision", nullable: true })
+  orientation: number;
+
+  @Column({ type: "double precision", nullable: true })
+  lat: number;
+
+  @Column({ type: "double precision", nullable: true })
+  lng: number;
+
   @CreateDateColumn() createdAt: string;
   @UpdateDateColumn() updatedAt: string;
 
