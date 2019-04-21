@@ -3,7 +3,6 @@ const resolvers = {
     DriversSubscription: {
       subscribe: (_, __, { pubSub }) => {
         // driverUpdate -> 그냥 채널이름임 내가 임의로 정해줌
-        console.log(`pubSub : ${pubSub}`);
         return pubSub.asyncIterator("driverUpdate");
       }
     }
