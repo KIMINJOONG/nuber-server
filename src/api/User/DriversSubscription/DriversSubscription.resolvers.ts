@@ -5,9 +5,7 @@ const resolvers = {
   Subscription: {
     DriversSubscription: {
       subscribe: withFilter(
-        (_, __, { pubSub }) =>
-          // driverUpdate -> 그냥 채널이름임 내가 임의로 정해줌
-          pubSub.asyncIterator("driverUpdate"),
+        (_, __, { pubSub }) => pubSub.asyncIterator("driverUpdate"), // driverUpdate는 내가 임의로 이름을 정한것
         (payload, _, { context }) => {
           const user: User = context.currentUser;
           const {
@@ -21,7 +19,7 @@ const resolvers = {
             driverLastLat >= userLastLat - 0.05 &&
             driverLastLat <= userLastLat + 0.05 &&
             driverLastLng >= userLastLng - 0.05 &&
-            driverLastLng >= userLastLng + 0.05
+            driverLastLng <= userLastLng + 0.05
           );
         }
       )

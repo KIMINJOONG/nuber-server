@@ -19,10 +19,11 @@ const resolvers: Resolvers = {
         const notNull = cleanNullArgs(args);
         try {
           await User.update({ id: user.id }, { ...notNull });
+          const updatedUser = await User.findOne({ id: user.id });
           // 유저 위치정보를 업데이트할때 pubSub안에 업데이트를 보냄
           // payload: 기본적으로는 정보, 내가받을정보
           // DriverSubscription -> DriverSubscription.graphql안에 동일안 이름으로 해야함 무조건!
-          pubSub.publish("driverUpdate", { DriversSubscription: user });
+          pubSub.publish("driverUpdate", { DriversSubscription: updatedUser });
           return {
             ok: true,
             error: null
