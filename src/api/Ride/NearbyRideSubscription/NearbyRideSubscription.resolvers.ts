@@ -5,7 +5,7 @@ const resolvers = {
   Subscription: {
     NearbyRideSubscription: {
       subscribe: withFilter(
-        (_, __, { pubSub }) => pubSub.asyncIterator("driverUpdate"), // driverUpdate는 내가 임의로 이름을 정한것
+        (_, __, { pubSub }) => pubSub.asyncIterator("rideRequest"), // rideRequest 내가 임의로 이름을 정한것
         (payload, _, { context }) => {
           const user: User = context.currentUser;
           const {
