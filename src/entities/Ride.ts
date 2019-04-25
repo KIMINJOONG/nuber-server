@@ -17,7 +17,7 @@ class Ride extends BaseEntity {
   @Column({
     type: "text",
     enum: ["ACCEPTED", "FINISHED", "CANCELED", "REQUESTING", "ONROUTE"],
-    default: "ACCEPTED"
+    default: "REQUESTING"
   })
   status: rideStatus;
 
@@ -47,6 +47,14 @@ class Ride extends BaseEntity {
 
   @Column({ type: "text" })
   duration: string;
+
+  //이렇게 하면 typeorm이 자동으로 데이터베이스를 보지 않고도 id를 붙여서 반환해줌
+  //typeorm이 driver와 passenger의 foreign key를 찾아서 보여줌. 처음부터 전체객체를 찾아서 보여줄필요가 없다.
+  @Column({ nullable: true })
+  passengerId: number;
+
+  @Column({ nullable: true })
+  driverId: number;
 
   @ManyToOne(type => User, user => user.ridesAsPassenger)
   passenger: User;

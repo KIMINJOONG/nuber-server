@@ -1,11 +1,11 @@
-import { Resolvers } from "src/types/resolvers";
-import privateResolver from "src/utils/resolverMiddleware";
-import User from "src/entities/User";
+import { Resolvers } from "../../../types/resolvers";
+import privateResolver from "../../../utils/resolverMiddleware";
+import User from "../../../entities/User";
 import {
   UpdateRideStatusMutationArgs,
   UpdateRideStatusResponse
-} from "src/types/graph";
-import Ride from "src/entities/Ride";
+} from "../../../types/graph";
+import Ride from "../../../entities/Ride";
 
 const resolvers: Resolvers = {
   Mutation: {
