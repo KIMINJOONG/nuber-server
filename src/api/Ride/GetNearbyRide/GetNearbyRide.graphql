@@ -5,5 +5,5 @@ type GetNearbyRideResponse {
 }
 
 type Query {
-  GetNearbyRides: GetNearbyRideResponse!
+  GetNearbyRide: GetNearbyRideResponse!
 }

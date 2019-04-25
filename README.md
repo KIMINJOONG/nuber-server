@@ -34,10 +34,11 @@ Server for the (N)uber clone course on nomad academy. GraphQL, Typescript, NodeJ
 - [x] Delete Place
 - [x] See Nearby Drivers
 - [x] Subscribe to Nearby Drivers
-- [ ] Request a Ride
-- [ ] Get Nearby Ride Requests
-- [ ] Subscribe to Nearby Ride Requests
-- [ ] Subscribe to Ride Status
+- [x] Request a Ride
+- [x] Get Nearby Ride Requests
+- [x] Subscribe to Nearby Ride Requests
+- [x] Update Ride Status
+- [x] Get Ride
 - [ ] Get Chat Room Messages
 - [ ] Subscribe to Chat Room Messages
 - [ ] Send a Chat Message

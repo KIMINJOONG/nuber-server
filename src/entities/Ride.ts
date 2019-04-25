@@ -7,7 +7,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn
 } from "typeorm";
-import { rideStatus } from "src/types/types";
+import { rideStatus } from "..//types/types";
 import User from "./User";
 
 @Entity()
@@ -53,11 +53,11 @@ class Ride extends BaseEntity {
   @Column({ nullable: true })
   passengerId: number;
 
-  @Column({ nullable: true })
-  driverId: number;
-
   @ManyToOne(type => User, user => user.ridesAsPassenger)
   passenger: User;
+
+  @Column({ nullable: true })
+  driverId: number;
 
   @ManyToOne(type => User, user => user.ridesAsDriver, { nullable: true })
   driver: User;

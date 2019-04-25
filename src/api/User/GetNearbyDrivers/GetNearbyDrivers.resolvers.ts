@@ -2,7 +2,7 @@ import { Resolvers } from "../../../types/resolvers";
 import privateResolver from "../../../utils/resolverMiddleware";
 import User from "../../../entities/User";
 import { Between, getRepository } from "typeorm";
-import { GetNearbyDriversResponse } from "src/types/graph";
+import { GetNearbyDriversResponse } from "../../../types/graph";
 
 const resolvers: Resolvers = {
   Query: {

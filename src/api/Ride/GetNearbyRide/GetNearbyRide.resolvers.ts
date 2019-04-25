@@ -1,13 +1,13 @@
-import { Resolvers } from "../../../types/resolvers";
-import privateResolver from "../../../utils/resolverMiddleware";
+import { Between, getRepository } from "typeorm";
+import Ride from "../../../entities/Ride";
 import User from "../../../entities/User";
 import { GetNearbyRideResponse } from "../../../types/graph";
-import { getRepository, Between } from "typeorm";
-import Ride from "../../../entities/Ride";
+import { Resolvers } from "../../../types/resolvers";
+import privateResolver from "../../../utils/resolverMiddleware";
 
 const resolvers: Resolvers = {
   Query: {
-    GetNearbyRides: privateResolver(
+    GetNearbyRide: privateResolver(
       async (_, __, { req }): Promise<GetNearbyRideResponse> => {
         const user: User = req.user;
         if (user.isDriving) {
@@ -41,7 +41,7 @@ const resolvers: Resolvers = {
         } else {
           return {
             ok: false,
-            error: "You are  not a dirver",
+            error: "You are not a driver",
             ride: null
           };
         }

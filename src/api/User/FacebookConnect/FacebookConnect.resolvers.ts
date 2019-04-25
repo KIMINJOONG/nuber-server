@@ -1,8 +1,8 @@
-import { Resolvers } from "src/types/resolvers";
+import { Resolvers } from "../../../types/resolvers";
 import {
   FacebookConnectMutationArgs,
   FacebookConnectResponse
-} from "src/types/graph";
+} from "../../../types/graph";
 import User from "../../../entities/User";
 import createJWT from "../../../utils/createJWT";
 
