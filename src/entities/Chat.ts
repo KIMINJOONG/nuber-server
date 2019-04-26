@@ -4,7 +4,9 @@ import {
   Entity,
   UpdateDateColumn,
   OneToMany,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  Column
 } from "typeorm";
 
 import Message from "./Message";
@@ -17,8 +19,17 @@ class Chat extends BaseEntity {
   @OneToMany(type => Message, message => message.chat)
   messages: Message[];
 
-  @OneToMany(type => User, user => user.chat)
-  participants: User[];
+  @ManyToOne(type => User, user => user.chatsAsPassenger)
+  passenger: User;
+
+  @Column({ nullable: true })
+  passengerId: number;
+
+  @ManyToOne(type => User, user => user.chatsAsDriver)
+  driver: User;
+
+  @Column({ nullable: true })
+  driverId: number;
 
   @CreateDateColumn() createdAt: string;
   @UpdateDateColumn() updatedAt: string;
