@@ -6,7 +6,7 @@ import {
   UpdateRideStatusResponse
 } from "../../../types/graph";
 import Ride from "../../../entities/Ride";
-import Chat from "src/entities/Chat";
+import Chat from "../../../entities/Chat";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -33,10 +33,12 @@ const resolvers: Resolvers = {
                 user.isTaken = true;
                 user.save();
                 // 운전자가 승낙을하면 채팅방을 만들어줌
-                await Chat.create({
+                const chat = await Chat.create({
                   driver: user,
                   passenger: ride.passenger
                 }).save();
+                ride.chat = chat;
+                ride.save();
               }
             } else {
               ride = await Ride.findOne({

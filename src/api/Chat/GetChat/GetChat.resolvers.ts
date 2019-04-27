@@ -1,48 +1,44 @@
 import { Resolvers } from "../../../types/resolvers";
 import privateResolver from "../../../utils/resolverMiddleware";
+import { GetChatQueryArgs, GetChatResponse } from "../../../types/graph";
 import User from "../../../entities/User";
-import { GetRideQueryArgs, GetRideResponse } from "../../../types/graph";
-import Ride from "../../../entities/Ride";
+import Chat from "../../../entities/Chat";
 
 const resolvers: Resolvers = {
   Query: {
-    GetRide: privateResolver(
-      async (_, args: GetRideQueryArgs, { req }): Promise<GetRideResponse> => {
+    GetChat: privateResolver(
+      async (_, args: GetChatQueryArgs, { req }): Promise<GetChatResponse> => {
         const user: User = req.user;
         try {
-          const ride = await Ride.findOne({
-            id: args.rideId
+          const chat = await Chat.findOne({
+            id: args.chatId
           });
-          user.isTaken = false;
-          user.isRiding = false;
-          user.save();
-          if (ride) {
-            if (ride.passengerId === user.id || ride.driverId === user.id) {
-              //ride.remove();
+          if (chat) {
+            if (chat.passengerId === user.id || chat.driverId === user.id) {
               return {
                 ok: true,
                 error: null,
-                ride
+                chat
               };
             } else {
               return {
                 ok: false,
-                error: "Not Authorized",
-                ride: null
+                error: "Not authorized to see this chat",
+                chat: null
               };
             }
           } else {
             return {
               ok: false,
-              error: "Ride not found",
-              ride: null
+              error: "Not found",
+              chat: null
             };
           }
         } catch (error) {
           return {
             ok: false,
             error: error.message,
-            ride: null
+            chat: null
           };
         }
       }
